@@ -11,14 +11,17 @@ public class Input : MonoBehaviour
 
     private CompositeDisposable Disposables=new CompositeDisposable();
 
-    [SerializeField]
-    private Transform CubeTransform;
-    // Start is called before the first frame update
+    public Domain MyDomain { get; set; }
+
+    public void Inject(Domain domain)
+    {
+        MyDomain = domain;
+    }
     private void Start()
     {
         CubeMoveButton.OnClickAsObservable().Subscribe(_ =>
         {
-
+            MyDomain.OnCubeMove();
         }).AddTo(Disposables);
     }
 
